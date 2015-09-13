@@ -9,7 +9,7 @@
 // - Send the email using the Mandrill API
 
 var fs = require('fs');
-
+var jade = require('jade');
 
 function csvParse(csvFilename) {
 	// array for parsed line objects
@@ -53,14 +53,33 @@ function render(data_object, template) {
 	for (var key in data_object) {
 	
 		template_constant = key.replace(/([a-z])([A-Z])/g, "$1_$2").toUpperCase();
-		console.log(template_constant);
+		// console.log(template_constant);
 		string = string.replace(template_constant, data_object[key]);
 	}
 	return string;
 }
 
-var data = csvParse('friend_list.csv');
-console.log(data[0]);
+/// ################### JADE ###################
 
-console.log(render(csvParse('friend_list.csv')[0], 'email_template.html'));
-// render(csvParse('friend_list.csv')[0], 'email_template.html')
+var data = csvParse('friend_list.csv');
+var file = fs.readFileSync('email_template.jade');
+data.forEach(function(d) {
+	var fn=jade.compile(file)
+	var finished_template = fn(d);
+	console.log(finished_template)
+});
+
+/// ################# Runtime #####################
+
+// var data = csvParse('friend_list.csv');
+
+
+// // data.forEach(function(d) { 
+// // 	console.log(render(d, 'email_template.html'));
+// // })
+
+// var data_object = data[0];
+// console.log(data_object);
+// // console.log(render(data[0], 'email_template.html'));
+
+
