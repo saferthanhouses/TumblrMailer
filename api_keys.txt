@@ -1,0 +1,3 @@
+OAuth Consumer Key:
+lKROSNnpzBtx1CjPeV8hr65n9NIdG01xMp8VyhtEZIFjMB4p92
+Secret Key:  FbbBixWEns2Jb8ojZgHKdjpUCTstzStyLDn7Cz8VPZ13ZlLij6
